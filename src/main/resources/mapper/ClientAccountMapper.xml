@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.firedance.gps.dao.ClientAccountMapper">
+    <resultMap id="BaseResultMap" type="com.firedance.gps.model.ClientAccount">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="service_start_datetime" property="serviceStartDateTime"/>
+        <result column="service_end_datetime" property="serviceEndDateTime"/>
+        <result column="forbidden" property="forbidden"/>
+    </resultMap>
+    <sql id="base_sql">
+        id,account,password,service_start_datetime,service_end_datetime,forbidden
+    </sql>
+    <select id="selectByAccount" resultMap="BaseResultMap">
+        select <include refid="base_sql"/> from client_account
+        where account = #{account}
+    </select>
+</mapper>

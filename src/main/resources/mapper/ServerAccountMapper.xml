@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.firedance.gps.dao.ClientAccountMapper">
+    <resultMap id="BaseResultMap" type="com.firedance.gps.model.ServerAccount">
+        <id column="id" property="id"/>
+        <result column="ip" property="ip"/>
+        <result column="port" property="port"/>
+         <result column="mount_point" property="mountPoint"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="service_start_datetime" property="serviceStartDateTime"/>
+        <result column="service_end_datetime" property="serviceEndDateTime"/>
+        <result column="is_in_use" property="inUse"/>
+        <result column="enable" property="enable"/>
+        <result column="disable_reason" property="disableReason"/>
+    </resultMap>
+    <sql id="base_sql">
+        id,ip,port,account,mount_point,password,service_start_datetime,service_end_datetime,is_in_use,enable,disable_reason
+    </sql>
+    <select id="selectByAccount" resultMap="BaseResultMap">
+        select <include refid="base_sql"/> from server_account
+        where account = #{account} and is_delete = 0
+    </select>
+    <update id="updateExceptionalAccount">
+        update server_account set enable = 0,disable_reason=#{reason}
+        where ip = #{ip} and port = #{port}
+    </update>
+    <select id="selectEnableOne" resultMap="BaseResultMap">
+        select <include refid="base_sql"/> from server_account
+        where is_in_use = 0 and enable = 1 and is_delete = 0
+        order by RAND() limit 1
+    </select>
+    <update id="updateOne" parameterType="com.firedance.gps.model.ServerAccount">
+        update server_account
+        <set>
+            <if test="password != null and password!=''">
+                password = #{password},
+            </if>
+            <if test="serviceStartDatetime != null">
+                service_start_datetime = #{serviceStartDatetime},
+            </if>
+            <if test="serviceEndDateTime != null">
+                service_end_datetime = #{serviceEndDateTime},
+            </if>
+            <if test="inUse != null">
+                is_in_use = #{inUse},
+            </if>
+            <if test="enable != null">
+                enable = #{enable},
+            </if>
+            <if test="disableReason != null">
+                disable_reason = #{disableReason},
+            </if>
+        </set>
+        where
+        ip = #{ip} and port = #{port}
+    </update>
+    <select id="listMountPoints" resultType="String">
+        select mount_point from server_account where enable = 1 and is_delete = 0
+    </select>
+
+</mapper>
