@@ -22,10 +22,9 @@ public class ServerAccountController {
     }
 
     @RequestMapping(value = "/server/exception_account",method = RequestMethod.POST)
-    public Result<ServerAccount> postExceptionServerAccount(@RequestBody ExceptionAccount exceptionAccount){
+    public Result<Boolean> postExceptionServerAccount(@RequestBody ExceptionAccount exceptionAccount){
         serverAccountService.postExceptionalAccount(exceptionAccount);
-        ServerAccount serverAccount = serverAccountService.getEnabledAccount();
-        return ResultHelper.success(serverAccount);
+        return ResultHelper.success(true);
     }
 
     @RequestMapping(value = "/server/account",method = RequestMethod.GET)
