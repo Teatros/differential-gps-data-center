@@ -32,7 +32,7 @@ public class ClientAccountController {
     }
 
     @RequestMapping(value = "/client/account/service_enable_status",method = RequestMethod.GET)
-    public Result<Boolean> checkUserServiceEnable(@RequestParam("account")String account){
+    public Result<Boolean> checkUserServiceEnable(@RequestParam("account")String account) throws Exception {
         return ResultHelper.success(clientAccountService.checkUserServiceEnable(account));
     }
 

@@ -11,7 +11,7 @@ public interface IClientAccountService {
      * @param account
      * @return
      */
-    Boolean checkUserServiceEnable(String account);
+    Boolean checkUserServiceEnable(String account) throws Exception;
 
     Boolean login(String account, String pw);
 

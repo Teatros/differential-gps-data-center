@@ -1,7 +1,6 @@
 package com.firedance.gps.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -10,10 +9,14 @@ import java.time.LocalDateTime;
  */
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ServerAccount {
     private String id;
     private String ip;
     private String port;
+    private String mountPoint;
     private String account;
     private String password;
     private LocalDateTime serviceStartDateTime;

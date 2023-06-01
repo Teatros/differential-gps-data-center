@@ -1,7 +1,7 @@
 package com.firedance.gps.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.firedance.gps.model.enums.AccountSpecificationEnum;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -10,11 +10,17 @@ import java.time.LocalDateTime;
  */
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ClientAccount {
     private String id;
     private String account;
     private String password;
+    private AccountSpecificationEnum specification;
     private LocalDateTime serviceStartDateTime;
     private LocalDateTime serviceEndDateTime;
+    private LocalDateTime lastLoginDateTime;
+    private LocalDateTime createDateTime;
     private Boolean forbidden;
 }

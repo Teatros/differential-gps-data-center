@@ -17,7 +17,7 @@ public interface ServerAccountMapper {
      * @param exception
      */
     void updateExceptionalAccount(@Param("ip") String ip, @Param("port") String port,
-                                  @Param("exception")String exception);
+                                  @Param("account") String account, @Param("exception")String exception);
 
     /**
      * 获取可用账户
@@ -35,4 +35,8 @@ public interface ServerAccountMapper {
      * @return
      */
     List<String> listMountPoints();
+
+    Integer countEnable();
+
+    Integer countAll();
 }

@@ -27,8 +27,11 @@ public class ClientAccountServiceImpl implements IClientAccountService {
     }
 
     @Override
-    public Boolean checkUserServiceEnable(String account) {
+    public Boolean checkUserServiceEnable(String account) throws Exception{
         ClientAccount clientAccount = clientAccountMapper.selectByAccount(account);
+        if(clientAccount == null){
+            return false;
+        }
         if(clientAccount.getForbidden()){
             return false;
         }
@@ -48,11 +51,13 @@ public class ClientAccountServiceImpl implements IClientAccountService {
             return false;
         }
         clientLoginRecordMapper.addLoginRecord(account,"");
+        clientAccountMapper.updateLoginDate(account,LocalDateTime.now());
         return true;
     }
 
     @Override
     public void postGGA(MessageDatagram datagram) {
         datagramMapper.insertGGA(datagram);
+        clientAccountMapper.insertLastDatagram(datagram);
     }
 }
