@@ -38,8 +38,8 @@
             <if test="password != null and password!=''">
                 password = #{password},
             </if>
-            <if test="serviceStartDatetime != null">
-                service_start_datetime = #{serviceStartDatetime},
+            <if test="serviceStartDateTime != null">
+                service_start_datetime = #{serviceStartDateTime},
             </if>
             <if test="serviceEndDateTime != null">
                 service_end_datetime = #{serviceEndDateTime},
