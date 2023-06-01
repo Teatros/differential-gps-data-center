@@ -9,10 +9,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MessageDatagram {
+public class ServerDatagram {
     private String ip;
     private String port;
     private String account;
-    private String datagram;
-    private LocalDateTime createDateTime;
+    private byte[] datagram;
 }

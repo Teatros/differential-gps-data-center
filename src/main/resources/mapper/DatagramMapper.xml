@@ -13,7 +13,7 @@
     <insert id="insertGGA" parameterType="com.firedance.gps.model.MessageDatagram">
         insert into client_datagram(account,datagram,create_date_time)values(#{account},#{datagram},NOW())
     </insert>
-    <insert id="insertServerData" parameterType="com.firedance.gps.model.MessageDatagram">
+    <insert id="insertServerData" parameterType="com.firedance.gps.model.ServerDatagram">
         insert into server_datagram(ip,port,account,datagram,create_date_time)values(#{ip},#{port},#{account},#{datagram},NOW())
     </insert>
 </mapper>

@@ -1,13 +1,17 @@
 package com.firedance.gps.model;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 /**
  * @author tangqi
  */
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ClientLoginRecord {
     private Integer id;
     private String account;

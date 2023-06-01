@@ -6,6 +6,7 @@ import com.firedance.gps.dao.ServerAccountMapper;
 import com.firedance.gps.dao.SysInternalMessageMapper;
 import com.firedance.gps.model.MessageDatagram;
 import com.firedance.gps.model.ServerAccount;
+import com.firedance.gps.model.ServerDatagram;
 import com.firedance.gps.model.SysInternalMessage;
 import com.firedance.gps.service.IServerAccountService;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class ServerAccountServiceImpl implements IServerAccountService {
     }
 
     @Override
-    public void postBaseStationData(MessageDatagram messageDatagram) {
+    public void postBaseStationData(ServerDatagram messageDatagram) {
         datagramMapper.insertServerData(messageDatagram);
     }
 

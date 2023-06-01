@@ -2,6 +2,7 @@ package com.firedance.gps.dao;
 
 import com.firedance.gps.model.ClientAccount;
 import com.firedance.gps.model.MessageDatagram;
+import com.firedance.gps.model.ServerDatagram;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -19,7 +20,7 @@ public interface DatagramMapper {
      * 插入服务报文信息
      * @param datagram
      */
-    void insertServerData(@Param("datagram") MessageDatagram datagram);
+    void insertServerData(@Param("datagram") ServerDatagram datagram);
 
 
 }
