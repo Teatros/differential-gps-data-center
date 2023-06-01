@@ -44,11 +44,9 @@ public class ServerAccountServiceImpl implements IServerAccountService {
         String message = "";
         if(enableCount == 0){
             message = "登出用户资源可用账户为0，请及时补充";
-        }
-        if(enableCount/all < 0.1){
+        }else if(enableCount/all < 0.1){
             message = "登出用户资源可用账户低于10%，请及时补充";
-        }
-        if(enableCount/all < 0.3){
+        } else if(enableCount/all < 0.3){
             message = "登出用户资源可用账户低于30%，请及时补充";
         }
         SysInternalMessage build = SysInternalMessage.builder().read(false).createDateTime(LocalDateTime.now()).message(message).build();
