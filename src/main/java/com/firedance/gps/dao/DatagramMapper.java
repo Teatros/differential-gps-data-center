@@ -14,13 +14,13 @@ public interface DatagramMapper {
      * 插入报文信息
      * @param datagram
      */
-    void insertGGA(@Param("datagram")MessageDatagram datagram);
+    void insertGGA(MessageDatagram datagram);
 
     /**
      * 插入服务报文信息
      * @param datagram
      */
-    void insertServerData(@Param("datagram") ServerDatagram datagram);
+    void insertServerData(ServerDatagram datagram);
 
 
 }
