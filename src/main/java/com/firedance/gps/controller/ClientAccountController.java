@@ -19,10 +19,12 @@ public class ClientAccountController {
 
     private static List<String> MOUNT_POINTS = new ArrayList<String>();
     static {
-        AccountSpecificationEnum[] values = AccountSpecificationEnum.values();
-        for (int i = 0; i < values.length; i++) {
-            MOUNT_POINTS.add(values[i].toString());
-        }
+        MOUNT_POINTS.add("/RTCM33");
+        MOUNT_POINTS.add("/RTCM33_GRCE");
+        MOUNT_POINTS.add("/RTCM30_GR");
+        MOUNT_POINTS.add("/RTCM33_GRC");
+        MOUNT_POINTS.add("/RTCM33_GRCEpro");
+        MOUNT_POINTS.add("/RTCM33_GRCEJ");
     }
 
     IClientAccountService clientAccountService;
