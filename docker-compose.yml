@@ -5,7 +5,7 @@ services:
     container_name: differential-gps-data-center
     restart: always
     ports:
-      - 8081:8081
+      - 8090:8090
     deploy:
       resources:
         limits:

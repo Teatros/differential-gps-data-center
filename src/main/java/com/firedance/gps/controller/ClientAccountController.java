@@ -25,6 +25,8 @@ public class ClientAccountController {
         MOUNT_POINTS.add("/RTCM33_GRC");
         MOUNT_POINTS.add("/RTCM33_GRCEpro");
         MOUNT_POINTS.add("/RTCM33_GRCEJ");
+        MOUNT_POINTS.add("/RTCM411");
+        MOUNT_POINTS.add("/RTCM33");
     }
 
     IClientAccountService clientAccountService;
