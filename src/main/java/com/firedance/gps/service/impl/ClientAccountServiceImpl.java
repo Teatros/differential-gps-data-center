@@ -21,9 +21,11 @@ public class ClientAccountServiceImpl implements IClientAccountService {
     private DatagramMapper datagramMapper;
 
     public ClientAccountServiceImpl(ClientAccountMapper clientAccountMapper,
-                                    ClientLoginRecordMapper clientLoginRecordMapper) {
+                                    ClientLoginRecordMapper clientLoginRecordMapper,
+                                    DatagramMapper datagramMapper) {
         this.clientAccountMapper = clientAccountMapper;
         this.clientLoginRecordMapper = clientLoginRecordMapper;
+        this.datagramMapper = datagramMapper;
     }
 
     @Override
