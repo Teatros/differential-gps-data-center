@@ -62,4 +62,9 @@ public class ClientAccountServiceImpl implements IClientAccountService {
         datagramMapper.insertGGA(datagram);
         clientAccountMapper.insertLastDatagram(datagram);
     }
+
+    @Override
+    public ClientAccount getClientAccount(String account) {
+        return clientAccountMapper.selectByAccount(account);
+    }
 }

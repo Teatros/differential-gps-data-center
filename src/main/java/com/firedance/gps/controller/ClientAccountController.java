@@ -2,6 +2,7 @@ package com.firedance.gps.controller;
 
 import com.firedance.gps.handler.result.Result;
 import com.firedance.gps.handler.result.ResultHelper;
+import com.firedance.gps.model.ClientAccount;
 import com.firedance.gps.model.MessageDatagram;
 import com.firedance.gps.model.enums.AccountSpecificationEnum;
 import com.firedance.gps.model.enums.ExceptionEnum;
@@ -39,6 +40,10 @@ public class ClientAccountController {
     public Result<Boolean> clientLogin(@RequestParam("account")String account,@RequestParam("pw")String pw,@RequestParam("mountPoint")String mountPoint){
         if(!MOUNT_POINTS.contains(mountPoint)){
             return ResultHelper.fail(ExceptionEnum.A000001.getCode(),ExceptionEnum.A000001.getMessage(),false );
+        }
+        ClientAccount clientAccount = clientAccountService.getClientAccount(account);
+        if(!clientAccount.getPassword().equals(pw)){
+            ResultHelper.fail(ExceptionEnum.A000004.getCode(),ExceptionEnum.A000004.getMessage(),false );
         }
         return ResultHelper.success(clientAccountService.login(account,pw));
     }

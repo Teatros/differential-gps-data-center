@@ -1,5 +1,6 @@
 package com.firedance.gps.service;
 
+import com.firedance.gps.model.ClientAccount;
 import com.firedance.gps.model.MessageDatagram;
 
 /**
@@ -21,4 +22,10 @@ public interface IClientAccountService {
      * @return
      */
     void postGGA(MessageDatagram datagram);
+
+    /**
+     * 获取账户信息
+     * @param account
+     */
+    ClientAccount getClientAccount(String account);
 }

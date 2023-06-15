@@ -8,6 +8,7 @@ public enum ExceptionEnum {
     A000001("A000001","挂载点不在支持列表中"),
     A000002("A000002","账户或密码错误"),
     A000003("A000003","账户不可用"),
+    A000004("A000004","password has updated,please reacquire it"),
     ;
 
     private String code;
