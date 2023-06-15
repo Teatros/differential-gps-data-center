@@ -58,4 +58,10 @@ public class ClientAccountController {
         clientAccountService.postGGA(datagram);
         return ResultHelper.success(true);
     }
+
+    @RequestMapping(value = "/client/account",method = RequestMethod.GET)
+    public Result<ClientAccount> getClientAccount(@RequestParam("account") String account){
+        ClientAccount clientAccount = clientAccountService.getClientAccount(account);
+        return ResultHelper.success(clientAccount);
+    }
 }
