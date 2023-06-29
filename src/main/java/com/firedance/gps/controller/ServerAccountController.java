@@ -6,9 +6,12 @@ import com.firedance.gps.handler.result.ResultHelper;
 import com.firedance.gps.model.MessageDatagram;
 import com.firedance.gps.model.ServerAccount;
 import com.firedance.gps.model.ServerDatagram;
+import com.firedance.gps.model.enums.ServiceProviderEnum;
 import com.firedance.gps.service.IClientAccountService;
 import com.firedance.gps.service.IServerAccountService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author tangqi
@@ -29,8 +32,13 @@ public class ServerAccountController {
     }
 
     @RequestMapping(value = "/server/account",method = RequestMethod.GET)
-    public Result<ServerAccount> getRandomEnabledServerAccount(){
-        return ResultHelper.success(serverAccountService.getEnabledAccount());
+    public Result<ServerAccount> getRandomEnabledServerAccount(@RequestParam("clientAccountServiceProvider")String serviceProvider,@RequestParam("mountPoint")String mountPoint){
+        ServiceProviderEnum serviceProviderEnum = ServiceProviderEnum.valueOf(serviceProvider);
+        List<String> mountPoints = serviceProviderEnum.getMountPoints();
+        if(!mountPoints.contains(mountPoint)){
+            mountPoint = serviceProviderEnum.getDefaultMountPoint();
+        }
+        return ResultHelper.success(serverAccountService.getEnabledAccount(serviceProvider,mountPoint));
     }
 
     @RequestMapping(value = "/server/base_station_data",method = RequestMethod.POST,consumes = "application/octet-stream")

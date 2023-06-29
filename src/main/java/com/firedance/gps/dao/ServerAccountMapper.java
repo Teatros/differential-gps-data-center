@@ -21,20 +21,16 @@ public interface ServerAccountMapper {
 
     /**
      * 获取可用账户
+     * @param serviceProvider
+     * @param mountPoint
      */
-    ServerAccount selectEnableOne();
+    ServerAccount selectEnableOne(@Param("serviceProvider")String serviceProvider,@Param("mountPoint") String mountPoint);
 
     /**
      * 根据ip+port更新
      * @param serverAccount
      */
     void updateOne(ServerAccount serverAccount);
-
-    /**
-     * 获取挂载点列表
-     * @return
-     */
-    List<String> listMountPoints();
 
     Integer countEnable();
 

@@ -4,7 +4,6 @@ import com.firedance.gps.controller.param.ExceptionAccount;
 import com.firedance.gps.dao.DatagramMapper;
 import com.firedance.gps.dao.ServerAccountMapper;
 import com.firedance.gps.dao.SysInternalMessageMapper;
-import com.firedance.gps.model.MessageDatagram;
 import com.firedance.gps.model.ServerAccount;
 import com.firedance.gps.model.ServerDatagram;
 import com.firedance.gps.model.SysInternalMessage;
@@ -38,8 +37,8 @@ public class ServerAccountServiceImpl implements IServerAccountService {
     }
 
     @Override
-    public ServerAccount getEnabledAccount() {
-        ServerAccount serverAccount = serverAccountMapper.selectEnableOne();
+    public ServerAccount getEnabledAccount(String serviceProvider, String mountPoint) {
+        ServerAccount serverAccount = serverAccountMapper.selectEnableOne(serviceProvider,mountPoint);
         Integer all = serverAccountMapper.countAll();
         Integer enableCount = serverAccountMapper.countEnable();
         String message = "";

@@ -6,29 +6,21 @@ import com.firedance.gps.model.ClientAccount;
 import com.firedance.gps.model.MessageDatagram;
 import com.firedance.gps.model.enums.AccountSpecificationEnum;
 import com.firedance.gps.model.enums.ExceptionEnum;
+import com.firedance.gps.model.enums.ServiceProviderEnum;
 import com.firedance.gps.service.IClientAccountService;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author tangqi
  */
 @RestController
 public class ClientAccountController {
-
-    private static List<String> MOUNT_POINTS = new ArrayList<String>();
-    static {
-        MOUNT_POINTS.add("/RTCM33");
-        MOUNT_POINTS.add("/RTCM33_GRCE");
-        MOUNT_POINTS.add("/RTCM30_GR");
-        MOUNT_POINTS.add("/RTCM33_GRC");
-        MOUNT_POINTS.add("/RTCM33_GRCEpro");
-        MOUNT_POINTS.add("/RTCM33_GRCEJ");
-        MOUNT_POINTS.add("/RTCM411");
-        MOUNT_POINTS.add("/RTCM33");
-    }
 
     IClientAccountService clientAccountService;
 
@@ -37,15 +29,18 @@ public class ClientAccountController {
     }
 
     @RequestMapping(value = "/client/login",method = RequestMethod.POST)
-    public Result<Boolean> clientLogin(@RequestParam("account")String account,@RequestParam("pw")String pw,@RequestParam("mountPoint")String mountPoint){
-        if(!MOUNT_POINTS.contains(mountPoint)){
-            return ResultHelper.fail(ExceptionEnum.A000001.getCode(),ExceptionEnum.A000001.getMessage(),false );
-        }
+    public Result<Map<String,Object>> clientLogin(@RequestParam("account")String account, @RequestParam("pw")String pw){
         ClientAccount clientAccount = clientAccountService.getClientAccount(account);
         if(!clientAccount.getPassword().equals(pw)){
             ResultHelper.fail(ExceptionEnum.A000004.getCode(),ExceptionEnum.A000004.getMessage(),false );
         }
-        return ResultHelper.success(clientAccountService.login(account,pw));
+        Boolean login = clientAccountService.login(account, pw);
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("result",login);
+        if(login){
+            result.put("serviceProvider",clientAccount.getServiceProvider());
+        }
+        return ResultHelper.success(result);
     }
 
     @RequestMapping(value = "/client/account/service_enable_status",method = RequestMethod.GET)

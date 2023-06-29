@@ -6,6 +6,7 @@
         <id column="id" property="id"/>
         <result column="account" property="account"/>
         <result column="password" property="password"/>
+        <result column="service_provider" property="serviceProvider"/>
         <result column="specification" property="specification"/>
         <result column="service_start_datetime" property="serviceStartDateTime"/>
         <result column="service_end_datetime" property="serviceEndDateTime"/>
@@ -14,7 +15,7 @@
         <result column="forbidden" property="forbidden"/>
     </resultMap>
     <sql id="base_sql">
-        id,account,password,specification,service_start_datetime,service_end_datetime,last_login_date_time,create_date_time,forbidden
+        id,account,password,service_provider,specification,service_start_datetime,service_end_datetime,last_login_date_time,create_date_time,forbidden
     </sql>
     <select id="selectByAccount" resultMap="BaseResultMap">
         select <include refid="base_sql"/> from client_account
