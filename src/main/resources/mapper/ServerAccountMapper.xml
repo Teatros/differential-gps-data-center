@@ -31,7 +31,12 @@
     <select id="selectEnableOne" resultMap="BaseResultMap">
         select <include refid="base_sql"/> from server_account
         where enable = 1 and is_delete = 0 and is_in_use = 0
-        and service_provider = #{serviceProvider} and mount_point = #{mountPoint}
+        <if test="serviceProvider!=null and serviceProvider != ''">
+            and service_provider = #{serviceProvider}
+        </if>
+        <if test="mountPoint!=null and mountPoint != ''">
+            and mount_point = #{mountPoint}
+        </if>
         order by RAND() limit 1
     </select>
     <update id="updateOne" parameterType="com.firedance.gps.model.ServerAccount">

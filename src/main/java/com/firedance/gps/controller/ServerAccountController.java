@@ -38,7 +38,11 @@ public class ServerAccountController {
         if(!mountPoints.contains(mountPoint)){
             mountPoint = serviceProviderEnum.getDefaultMountPoint();
         }
-        return ResultHelper.success(serverAccountService.getEnabledAccount(serviceProvider,mountPoint));
+        ServerAccount enabledAccount = serverAccountService.getEnabledAccount(serviceProvider, mountPoint);
+        if(enabledAccount == null){
+            enabledAccount = serverAccountService.getEnabledAccount(serviceProvider, null);
+        }
+        return ResultHelper.success(enabledAccount);
     }
 
     @RequestMapping(value = "/server/base_station_data",method = RequestMethod.POST,consumes = "application/octet-stream")
